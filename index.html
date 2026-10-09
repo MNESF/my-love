@@ -2,721 +2,1301 @@
 <html lang="fa" dir="rtl">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-  />
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
-  <meta name="theme-color" content="#ff6f91" />
+  <meta name="theme-color" content="#fb6f92">
 
-  <title>یه حرف کوچیک ❤️</title>
+  <title>یه حرف کوچیک برای تو ❤️</title>
 
-  <!-- Persian Datepicker -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/persian-datepicker@latest/dist/css/persian-datepicker.min.css"
-  />
+  >
 
   <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/persian-date/dist/persian-date.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/persian-datepicker/dist/js/persian-datepicker.min.js"></script>
 
   <style>
-    :root {
-      --red: #e63955;
-      --red-dark: #d62849;
-      --pink: #ff7fa8;
-      --pink-light: #ffd2df;
-      --text: #41414b;
-      --muted: #777783;
-      --white: #ffffff;
-      --shadow: 0 24px 80px rgba(111, 17, 48, 0.22);
+
+    :root{
+      --pink:#ff5d8f;
+      --pink2:#ff85a1;
+      --pink3:#ffb3c6;
+
+      --red:#e63961;
+      --deep:#b91c4c;
+
+      --white:#fff;
+      --text:#40333a;
+      --muted:#7b6870;
+
+      --shadow:
+        0 30px 80px rgba(105,16,52,.25);
     }
 
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
+    *{
+      box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
     }
 
-    html {
-      min-height: 100%;
-      background: #ff758c;
+    html,
+    body{
+      margin:0;
+      min-height:100%;
     }
 
-    body {
-      margin: 0;
-
-      min-height: 100vh;
-      min-height: 100svh;
+    body{
+      min-height:100vh;
+      min-height:100svh;
 
       padding:
-        max(18px, env(safe-area-inset-top))
-        max(16px, env(safe-area-inset-right))
-        max(18px, env(safe-area-inset-bottom))
-        max(16px, env(safe-area-inset-left));
+        max(18px,env(safe-area-inset-top))
+        max(14px,env(safe-area-inset-right))
+        max(18px,env(safe-area-inset-bottom))
+        max(14px,env(safe-area-inset-left));
 
-      display: grid;
-      place-items: center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
 
-      overflow-x: hidden;
+      overflow-x:hidden;
 
       font-family:
         Tahoma,
         Arial,
         sans-serif;
 
-      color: var(--text);
+      color:var(--text);
 
       background:
-        radial-gradient(
-          circle at 10% 10%,
-          rgba(255,255,255,.24),
-          transparent 25%
-        ),
-        radial-gradient(
-          circle at 90% 80%,
-          rgba(255,255,255,.18),
-          transparent 25%
-        ),
         linear-gradient(
-          135deg,
-          #ff758c 0%,
-          #ff7eb3 48%,
-          #ff96b8 100%
+          -45deg,
+          #ff758c,
+          #ff7eb3,
+          #ff92a5,
+          #ff6f91
         );
 
-      overscroll-behavior-y: none;
-      -webkit-overflow-scrolling: touch;
+      background-size:400% 400%;
+
+      animation:
+        bgMove 12s ease infinite;
+    }
+
+    @keyframes bgMove{
+
+      0%{
+        background-position:0% 50%;
+      }
+
+      50%{
+        background-position:100% 50%;
+      }
+
+      100%{
+        background-position:0% 50%;
+      }
+
     }
 
     button,
-    input {
-      font-family: inherit;
+    input{
+      font-family:inherit;
     }
 
-    button {
-      touch-action: manipulation;
+    button{
+      touch-action:manipulation;
     }
 
-    /* =========================
-       BACKGROUND
-    ========================= */
+    /* ================================
+       BACKGROUND DECORATION
+    ================================= */
 
-    .background-glow {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
+    .ambient{
+      position:fixed;
+      inset:0;
+
+      overflow:hidden;
+
+      pointer-events:none;
+
+      z-index:0;
     }
 
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(8px);
-      opacity: .25;
-      background: white;
+    .orb{
+      position:absolute;
+
+      border-radius:50%;
+
+      background:
+        rgba(255,255,255,.22);
+
+      filter:blur(5px);
+
+      animation:
+        orbFloat 9s ease-in-out infinite;
     }
 
-    .blob-1 {
-      width: 170px;
-      height: 170px;
-      top: -70px;
-      right: -50px;
+    .orb.one{
+      width:220px;
+      height:220px;
+
+      top:-70px;
+      right:-70px;
     }
 
-    .blob-2 {
-      width: 220px;
-      height: 220px;
-      bottom: -100px;
-      left: -80px;
+    .orb.two{
+      width:270px;
+      height:270px;
+
+      left:-110px;
+      bottom:-100px;
+
+      animation-delay:-4s;
     }
 
-    /* =========================
-       CARD
-    ========================= */
+    .orb.three{
+      width:110px;
+      height:110px;
 
-    .container {
-      position: relative;
-      z-index: 10;
+      left:15%;
+      top:15%;
 
-      width: min(100%, 470px);
+      opacity:.16;
 
-      padding: clamp(26px, 6vw, 42px)
-               clamp(18px, 5vw, 30px);
+      animation-delay:-2s;
+    }
 
-      border-radius: clamp(24px, 7vw, 38px);
+    @keyframes orbFloat{
+
+      0%,
+      100%{
+        transform:
+          translate3d(0,0,0)
+          scale(1);
+      }
+
+      50%{
+        transform:
+          translate3d(20px,-24px,0)
+          scale(1.08);
+      }
+
+    }
+
+    /* ================================
+       CONTAINER
+    ================================= */
+
+    .app{
+      position:relative;
+
+      width:min(100%,480px);
+
+      z-index:10;
+    }
+
+    .card{
+      position:relative;
+
+      padding:
+        clamp(25px,6vw,38px)
+        clamp(17px,5vw,28px);
+
+      border-radius:
+        clamp(28px,7vw,42px);
+
+      overflow:hidden;
 
       background:
         linear-gradient(
-          180deg,
-          rgba(255,255,255,.98),
-          rgba(255,250,252,.97)
+          145deg,
+          rgba(255,255,255,.94),
+          rgba(255,249,251,.90)
         );
 
-      box-shadow: var(--shadow);
+      border:
+        1px solid
+        rgba(255,255,255,.85);
 
-      text-align: center;
+      box-shadow:
+        var(--shadow);
 
-      overflow: visible;
+      backdrop-filter:
+        blur(18px);
 
-      border: 1px solid rgba(255,255,255,.9);
+      -webkit-backdrop-filter:
+        blur(18px);
 
-      animation: cardIn .7s cubic-bezier(.22,1,.36,1);
+      animation:
+        cardShow .8s cubic-bezier(.16,1,.3,1);
     }
 
-    @keyframes cardIn {
-      from {
-        opacity: 0;
-        transform: translateY(25px) scale(.97);
-      }
+    .card::before{
+      content:"";
 
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      position:absolute;
+
+      width:240px;
+      height:240px;
+
+      border-radius:50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,124,160,.17),
+          transparent 70%
+        );
+
+      top:-130px;
+      left:-90px;
+
+      pointer-events:none;
     }
 
-    /* =========================
+    @keyframes cardShow{
+
+      from{
+        opacity:0;
+
+        transform:
+          translateY(32px)
+          scale(.96);
+      }
+
+      to{
+        opacity:1;
+
+        transform:
+          translateY(0)
+          scale(1);
+      }
+
+    }
+
+    /* ================================
+       SMALL HEADER
+    ================================= */
+
+    .mini-badge{
+      display:inline-flex;
+
+      align-items:center;
+      gap:7px;
+
+      padding:
+        8px 14px;
+
+      border-radius:
+        999px;
+
+      margin-bottom:
+        10px;
+
+      color:#c62d59;
+
+      background:
+        rgba(255,220,229,.7);
+
+      border:
+        1px solid
+        rgba(255,151,180,.25);
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+    }
+
+    /* ================================
        PAGES
-    ========================= */
+    ================================= */
 
-    .page {
-      display: none;
-      animation: pageIn .45s ease;
+    .page{
+      display:none;
+
+      text-align:center;
     }
 
-    .page.active {
-      display: block;
+    .page.active{
+      display:block;
+
+      animation:
+        pageEnter .55s
+        cubic-bezier(.16,1,.3,1);
     }
 
-    @keyframes pageIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
+    @keyframes pageEnter{
+
+      from{
+        opacity:0;
+
+        transform:
+          translateY(18px);
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      to{
+        opacity:1;
+
+        transform:
+          translateY(0);
       }
+
     }
 
-    /* =========================
-       HEART
-    ========================= */
+    /* ================================
+       PROGRESS
+    ================================= */
 
-    .heart {
-      width: 104px;
-      height: 104px;
+    .progress{
+      display:flex;
 
-      margin: 0 auto 10px;
+      align-items:center;
+      justify-content:center;
 
-      display: grid;
-      place-items: center;
+      gap:8px;
 
-      font-size: clamp(62px, 18vw, 82px);
+      margin-bottom:18px;
+    }
+
+    .progress span{
+      width:7px;
+      height:7px;
+
+      border-radius:50%;
+
+      background:
+        #f2d4dd;
+
+      transition:
+        all .3s ease;
+    }
+
+    .progress span.active{
+      width:23px;
+
+      border-radius:10px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--pink),
+          var(--red)
+        );
+    }
+
+    /* ================================
+       MAIN ICON
+    ================================= */
+
+    .love-icon{
+      position:relative;
+
+      width:
+        clamp(94px,24vw,118px);
+
+      height:
+        clamp(94px,24vw,118px);
+
+      margin:
+        3px auto
+        10px;
+
+      display:grid;
+
+      place-items:center;
+    }
+
+    .love-icon::before{
+      content:"";
+
+      position:absolute;
+
+      inset:8px;
+
+      border-radius:50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,121,153,.18),
+          transparent 70%
+        );
+
+      animation:
+        halo 1.8s ease
+        infinite;
+    }
+
+    .love-icon span{
+      position:relative;
+
+      font-size:
+        clamp(65px,18vw,86px);
+
+      z-index:2;
 
       filter:
         drop-shadow(
-          0 10px 18px rgba(230,57,85,.18)
+          0 12px 18px
+          rgba(217,52,92,.20)
         );
 
-      animation: pulse 1.35s ease-in-out infinite;
-      transform-origin: center;
+      animation:
+        beat 1.25s ease
+        infinite;
     }
 
-    @keyframes pulse {
+    @keyframes beat{
+
       0%,
-      100% {
-        transform: scale(1);
+      100%{
+        transform:
+          scale(1);
       }
 
-      50% {
-        transform: scale(1.12);
+      40%{
+        transform:
+          scale(1.12);
       }
+
+      60%{
+        transform:
+          scale(1.05);
+      }
+
     }
 
-    h1 {
-      margin: 8px 0 12px;
+    @keyframes halo{
 
-      color: var(--red);
+      0%,
+      100%{
+        transform:
+          scale(.9);
 
-      font-size: clamp(22px, 6vw, 29px);
+        opacity:.7;
+      }
 
-      line-height: 1.7;
+      50%{
+        transform:
+          scale(1.15);
+
+        opacity:.2;
+      }
+
     }
 
-    p {
-      margin: 0 auto;
+    /* ================================
+       TEXT
+    ================================= */
 
-      color: var(--muted);
+    h1{
+      margin:
+        7px 0
+        11px;
 
-      font-size: clamp(15px, 4.2vw, 17px);
+      color:
+        var(--red);
 
-      line-height: 2;
+      font-size:
+        clamp(22px,6vw,30px);
 
-      max-width: 390px;
+      line-height:
+        1.65;
+
+      font-weight:
+        900;
     }
 
-    /* =========================
-       BUTTONS
-    ========================= */
+    .lead{
+      max-width:
+        390px;
 
-    .buttons {
-      position: relative;
+      margin:
+        0 auto;
 
-      width: 100%;
-      min-height: 118px;
+      color:
+        var(--muted);
 
-      margin-top: 28px;
+      font-size:
+        clamp(14.5px,4vw,17px);
+
+      line-height:
+        2;
+
+      text-align:center;
     }
 
-    .btn {
-      border: 0;
-      outline: 0;
+    /* ================================
+       PAGE 1 BUTTONS
+    ================================= */
 
-      min-height: 54px;
+    .decision-zone{
+      position:relative;
 
-      padding: 13px 28px;
+      min-height:
+        145px;
 
-      border-radius: 999px;
+      margin-top:
+        28px;
+    }
 
-      font-size: 18px;
-      font-weight: 700;
+    .btn{
+      border:0;
 
-      cursor: pointer;
+      min-height:
+        55px;
+
+      border-radius:
+        999px;
+
+      padding:
+        13px 27px;
+
+      font-size:
+        17px;
+
+      font-weight:
+        800;
+
+      cursor:pointer;
 
       transition:
         transform .2s ease,
         box-shadow .2s ease,
-        opacity .2s ease,
-        background .2s ease;
-
-      user-select: none;
-      -webkit-user-select: none;
+        opacity .2s ease;
     }
 
-    .btn:active {
-      transform: scale(.96);
+    .btn:active{
+      transform:
+        scale(.96);
     }
 
-    #yes {
-      position: absolute;
+    #yes{
+      position:absolute;
 
-      right: 50%;
-      top: 0;
+      right:50%;
 
-      transform: translateX(50%);
+      top:0;
 
-      color: white;
+      transform:
+        translateX(50%);
+
+      color:white;
 
       background:
         linear-gradient(
           135deg,
-          #ef476f,
-          #e63955
+          #ff527b,
+          #d92b5b
         );
 
       box-shadow:
-        0 12px 26px rgba(230,57,85,.28);
+        0 14px 30px
+        rgba(217,43,91,.3);
 
-      z-index: 2;
+      z-index:4;
     }
 
-    #yes:active {
+    #yes:hover{
+      box-shadow:
+        0 18px 38px
+        rgba(217,43,91,.37);
+    }
+
+    #no{
+      position:absolute;
+
+      left:50%;
+
+      bottom:2px;
+
       transform:
-        translateX(50%)
-        scale(.96);
+        translateX(-50%);
+
+      color:#776a70;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f1ecee,
+          #e7dfe2
+        );
+
+      z-index:5;
     }
 
-    #no {
-      position: absolute;
+    .hint{
+      margin-top:
+        8px;
 
-      left: 50%;
-      bottom: 0;
+      font-size:
+        11px;
 
-      transform: translateX(-50%);
-
-      background: #eeeeF2;
-      color: #666;
-
-      z-index: 3;
-
-      transition:
-        left .22s ease,
-        top .22s ease,
-        transform .22s ease;
+      color:
+        #b09aa2;
     }
 
-    /* =========================
+    /* ================================
        FORM
-    ========================= */
+    ================================= */
 
-    .form {
-      margin-top: 24px;
+    .form{
+      margin-top:
+        24px;
     }
 
-    .field {
-      position: relative;
-      margin-bottom: 14px;
+    .field{
+      position:relative;
+
+      margin-bottom:
+        13px;
     }
 
-    .field-icon {
-      position: absolute;
-      top: 50%;
-      right: 18px;
+    .field-icon{
+      position:absolute;
 
-      transform: translateY(-50%);
+      top:50%;
+      right:17px;
 
-      font-size: 20px;
+      transform:
+        translateY(-50%);
 
-      pointer-events: none;
-      z-index: 2;
+      z-index:3;
+
+      font-size:
+        19px;
+
+      pointer-events:none;
     }
 
-    input {
-      appearance: none;
-      -webkit-appearance: none;
+    input{
+      width:100%;
 
-      display: block;
+      height:59px;
 
-      width: 100%;
-      height: 58px;
+      border:
+        1.5px solid
+        #f0dbe2;
+
+      outline:0;
+
+      border-radius:
+        19px;
 
       padding:
-        12px
-        52px
-        12px
-        18px;
+        12px 50px
+        12px 16px;
 
-      border: 1.5px solid #eee1e6;
+      background:
+        rgba(255,250,252,.82);
 
-      border-radius: 18px;
+      color:
+        #42353b;
 
-      background: #fffafb;
+      font-size:
+        16px;
 
-      color: #40404a;
-
-      font-size: 16px;
-
-      text-align: right;
-
-      outline: none;
+      text-align:right;
 
       transition:
         border .2s ease,
         box-shadow .2s ease,
-        background .2s ease;
+        background .2s ease,
+        transform .2s ease;
     }
 
-    input::placeholder {
-      color: #aaa2a6;
-    }
+    input:focus{
+      border-color:
+        #f389a6;
 
-    input:focus {
-      border-color: #f08aa4;
-
-      background: white;
+      background:white;
 
       box-shadow:
-        0 0 0 4px rgba(230,57,85,.08);
+        0 0 0 4px
+        rgba(235,76,118,.08);
+
+      transform:
+        translateY(-1px);
     }
 
-    input[type="time"] {
-      direction: ltr;
-      text-align: center;
+    input::placeholder{
+      color:#b29fa6;
     }
 
-    #save {
-      width: 100%;
+    input[type="time"]{
+      direction:ltr;
+      text-align:center;
+    }
 
-      margin-top: 7px;
+    #save{
+      width:100%;
 
-      color: white;
+      margin-top:
+        5px;
+
+      position:relative;
+
+      overflow:hidden;
+
+      color:white;
 
       background:
         linear-gradient(
           135deg,
-          #ef476f,
-          #d92d50
+          #ff527b,
+          #d92b5b
         );
 
       box-shadow:
-        0 12px 28px rgba(230,57,85,.25);
+        0 14px 30px
+        rgba(217,43,91,.26);
     }
 
-    #save:disabled {
-      opacity: .72;
-      cursor: not-allowed;
+    #save::after{
+      content:"";
+
+      position:absolute;
+
+      width:80px;
+      height:140%;
+
+      top:-20%;
+
+      left:-100px;
+
+      transform:
+        rotate(20deg);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.25),
+          transparent
+        );
+
+      animation:
+        shine 3.2s
+        infinite;
     }
 
-    .small-note {
-      margin-top: 14px;
+    @keyframes shine{
 
-      color: #aaa;
+      0%{
+        left:-120px;
+      }
 
-      font-size: 12px;
+      60%{
+        left:120%;
+      }
 
-      line-height: 1.9;
+      100%{
+        left:120%;
+      }
+
     }
 
-    /* =========================
-       PAGE 3
-    ========================= */
-
-    #page3 .heart {
-      width: auto;
-      font-size: clamp(42px, 12vw, 60px);
+    #save:disabled{
+      opacity:.72;
     }
 
-    .message-box {
-      margin-top: 18px;
+    .form-note{
+      margin-top:
+        12px;
 
-      padding: 20px 18px;
+      color:
+        #ad99a1;
 
-      border-radius: 22px;
+      font-size:
+        11px;
+
+      line-height:
+        1.9;
+    }
+
+    /* ================================
+       SUCCESS PAGE
+    ================================= */
+
+    .success-circle{
+      width:
+        86px;
+
+      height:
+        86px;
+
+      display:grid;
+
+      place-items:center;
+
+      margin:
+        2px auto
+        14px;
+
+      border-radius:
+        50%;
+
+      color:white;
+
+      font-size:
+        36px;
 
       background:
         linear-gradient(
           135deg,
-          #fff6f9,
+          #ff507c,
+          #e02d5c
+        );
+
+      box-shadow:
+        0 15px 35px
+        rgba(216,43,91,.28);
+
+      animation:
+        successPop .55s
+        cubic-bezier(.34,1.56,.64,1);
+    }
+
+    @keyframes successPop{
+
+      from{
+        transform:
+          scale(0)
+          rotate(-30deg);
+      }
+
+      to{
+        transform:
+          scale(1)
+          rotate(0);
+      }
+
+    }
+
+    .message-card{
+      position:relative;
+
+      margin-top:
+        18px;
+
+      padding:
+        21px 18px;
+
+      border-radius:
+        25px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fff7fa,
           #fff
         );
 
-      border: 1px solid #ffe4ec;
+      border:
+        1px solid
+        #ffe0e9;
 
       box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.6);
+        inset 0 0 30px
+        rgba(255,116,153,.04);
+
+      overflow:hidden;
     }
 
-    .typing {
-      min-height: 270px;
+    .message-card::before{
+      content:"💗";
 
-      white-space: pre-line;
+      position:absolute;
 
-      text-align: right;
+      top:-12px;
+      left:4px;
 
-      color: #575760;
+      font-size:
+        60px;
 
-      line-height: 2.05;
-
-      font-size: clamp(14px, 4vw, 16px);
+      opacity:.05;
     }
 
-    .cursor::after {
-      content: "▋";
+    .typing{
+      position:relative;
 
-      display: inline-block;
+      min-height:
+        300px;
 
-      color: var(--red);
+      margin:0;
 
-      margin-right: 2px;
+      white-space:
+        pre-line;
 
-      animation: blink .8s infinite;
+      text-align:
+        right;
+
+      color:
+        #5e4d54;
+
+      font-size:
+        clamp(14px,4vw,16px);
+
+      line-height:
+        2.12;
+
+      z-index:2;
     }
 
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
-    }
+    .typing.cursor::after{
+      content:"|";
 
-    /* =========================
-       FLOATING HEARTS
-    ========================= */
+      color:
+        var(--red);
 
-    .heart-bg {
-      position: fixed;
+      font-weight:
+        800;
 
-      bottom: -50px;
-
-      pointer-events: none;
-
-      z-index: 2;
-
-      opacity: 0;
+      margin-right:
+        2px;
 
       animation:
-        floatHeart var(--duration, 6s)
-        linear forwards;
-
-      filter:
-        drop-shadow(
-          0 4px 8px rgba(150,0,50,.12)
-        );
+        blink .7s infinite;
     }
 
-    @keyframes floatHeart {
-      0% {
-        opacity: 0;
+    @keyframes blink{
+
+      50%{
+        opacity:0;
+      }
+
+    }
+
+    /* ================================
+       FLOATING HEARTS
+    ================================= */
+
+    .float-heart{
+      position:fixed;
+
+      bottom:-45px;
+
+      pointer-events:none;
+
+      z-index:2;
+
+      opacity:0;
+
+      animation:
+        floatUp
+        var(--duration)
+        linear forwards;
+    }
+
+    @keyframes floatUp{
+
+      0%{
+        opacity:0;
+
         transform:
-          translate3d(0, 0, 0)
-          rotate(0deg)
-          scale(.65);
+          translate3d(0,0,0)
+          scale(.6)
+          rotate(0);
       }
 
-      15% {
-        opacity: .7;
+      15%{
+        opacity:.7;
       }
 
-      85% {
-        opacity: .5;
+      80%{
+        opacity:.5;
       }
 
-      100% {
-        opacity: 0;
+      100%{
+        opacity:0;
+
         transform:
           translate3d(
-            var(--drift, 20px),
+            var(--drift),
             -115vh,
             0
           )
-          rotate(40deg)
-          scale(1.15);
+          scale(1.15)
+          rotate(45deg);
       }
+
     }
 
-    /* =========================
-       DATEPICKER MOBILE FIX
-    ========================= */
+    /* ================================
+       CONFETTI
+    ================================= */
 
-    .datepicker-container {
-      z-index: 999999 !important;
+    .confetti-heart{
+      position:fixed;
+
+      top:50%;
+      left:50%;
+
+      z-index:999;
+
+      pointer-events:none;
+
+      font-size:
+        var(--size);
+
+      animation:
+        explodeHeart
+        1.6s ease-out forwards;
     }
 
-    .datepicker-plot-area {
-      max-width: calc(100vw - 24px) !important;
-      border-radius: 18px !important;
-      overflow: hidden;
+    @keyframes explodeHeart{
+
+      0%{
+        opacity:1;
+
+        transform:
+          translate(-50%,-50%)
+          scale(.5)
+          rotate(0);
+      }
+
+      100%{
+        opacity:0;
+
+        transform:
+          translate(
+            calc(-50% + var(--x)),
+            calc(-50% + var(--y))
+          )
+          scale(1.2)
+          rotate(var(--r));
+      }
+
     }
 
-    /* =========================
-       SMALL MOBILE
-    ========================= */
+    /* ================================
+       MOBILE
+    ================================= */
 
-    @media (max-width: 360px) {
-      body {
-        padding-left: 10px;
-        padding-right: 10px;
+    @media(max-width:360px){
+
+      body{
+        padding-left:
+          9px;
+
+        padding-right:
+          9px;
       }
 
-      .container {
-        padding-left: 15px;
-        padding-right: 15px;
+      .card{
+        padding-left:
+          14px;
+
+        padding-right:
+          14px;
       }
 
-      .btn {
-        font-size: 16px;
-        padding-left: 22px;
-        padding-right: 22px;
+      .btn{
+        font-size:
+          15.5px;
+
+        padding-left:
+          22px;
+
+        padding-right:
+          22px;
       }
+
     }
 
-    /* گوشی‌های کوتاه مثل مرورگر landscape */
-    @media (max-height: 650px) {
-      body {
-        place-items: start center;
+    @media(max-height:660px){
+
+      body{
+        align-items:
+          flex-start;
       }
 
-      .container {
-        margin-top: 5px;
-        margin-bottom: 5px;
+      .app{
+        margin:
+          3px 0;
       }
 
-      .heart {
-        font-size: 60px;
-        height: 80px;
+      .love-icon{
+        height:
+          82px;
       }
+
+      .love-icon span{
+        font-size:
+          62px;
+      }
+
     }
 
-    /* Reduce Motion */
-    @media (prefers-reduced-motion: reduce) {
+    .datepicker-container{
+      z-index:
+        999999 !important;
+    }
+
+    .datepicker-plot-area{
+      max-width:
+        calc(100vw - 20px) !important;
+
+      border-radius:
+        18px !important;
+
+      overflow:
+        hidden;
+    }
+
+    @media(prefers-reduced-motion:reduce){
+
       *,
       *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
+      *::after{
+        animation-duration:
+          .01ms !important;
+
+        animation-iteration-count:
+          1 !important;
       }
+
     }
+
   </style>
 </head>
 
 <body>
 
-  <div class="background-glow">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-  </div>
+<div class="ambient">
 
-  <main class="container">
+  <div class="orb one"></div>
 
-    <!-- PAGE 1 -->
+  <div class="orb two"></div>
+
+  <div class="orb three"></div>
+
+</div>
+
+
+<div class="app">
+
+  <div class="card">
+
+    <div class="progress">
+
+      <span
+        id="progress1"
+        class="active">
+      </span>
+
+      <span
+        id="progress2">
+      </span>
+
+      <span
+        id="progress3">
+      </span>
+
+    </div>
+
+
+    <!-- ================= PAGE 1 ================= -->
+
     <section
       id="page1"
       class="page active"
-      aria-labelledby="title1"
     >
 
-      <div class="heart">
-        ❤️
+      <div class="mini-badge">
+        یه پیام مخصوص تو ❤️
       </div>
 
-      <h1 id="title1">
+      <div class="love-icon">
+
+        <span>
+          ❤️
+        </span>
+
+      </div>
+
+      <h1>
         میای باهم صحبت کنیم؟
       </h1>
 
-      <p>
-        شاید هنوز چندتا حرف مونده که باید
-        آروم و قشنگ با هم بزنیم...
+      <p class="lead">
+
+        شاید هنوز چندتا حرف مونده...
+
+        حرفایی که بهتره
+        آروم، بدون عجله و کنار هم بزنیم.
+
       </p>
 
       <div
-        class="buttons"
-        id="buttonsArea"
+        id="decisionZone"
+        class="decision-zone"
       >
 
         <button
-          type="button"
-          class="btn"
           id="yes"
+          class="btn"
+          type="button"
         >
-          آره ❤️
+          آره، بیا ❤️
         </button>
 
         <button
-          type="button"
-          class="btn"
           id="no"
+          class="btn"
+          type="button"
         >
           نه
         </button>
 
       </div>
 
+      <div class="hint">
+        فکر کنم یکی از این دوتا دکمه خیلی بیشتر دوستت داره 😌
+      </div>
+
     </section>
 
 
-    <!-- PAGE 2 -->
+    <!-- ================= PAGE 2 ================= -->
+
     <section
       id="page2"
       class="page"
-      aria-labelledby="title2"
     >
 
-      <div class="heart">
-        💌
+      <div class="mini-badge">
+        فقط یه قرار کوچولو 💌
       </div>
 
-      <h1 id="title2">
-        پس بیا یه قرار کوچیک داشته باشیم ❤️
+      <div class="love-icon">
+
+        <span>
+          💌
+        </span>
+
+      </div>
+
+      <h1>
+        پس بیا همدیگه رو ببینیم
       </h1>
 
-      <p>
-        این دوری رو با یه دیدار قشنگ تموم کنیم...
+      <p class="lead">
+
+        یه زمان و یه جای قشنگ انتخاب کن...
+
+        بذار این دوری با
+        یه دیدار خوب تموم بشه ❤️
+
       </p>
 
       <div class="form">
@@ -730,11 +1310,9 @@
           <input
             id="date"
             type="text"
-            inputmode="none"
-            autocomplete="off"
-            placeholder="انتخاب تاریخ قرار"
+            placeholder="تاریخ قرار"
             readonly
-          />
+          >
 
         </div>
 
@@ -748,7 +1326,7 @@
             id="time"
             type="time"
             step="300"
-          />
+          >
 
         </div>
 
@@ -761,24 +1339,26 @@
           <input
             id="place"
             type="text"
-            autocomplete="off"
-            enterkeyhint="done"
-            placeholder="مکان قرار"
             maxlength="100"
-          />
+            autocomplete="off"
+            placeholder="کجا همدیگه رو ببینیم؟"
+          >
 
         </div>
 
         <button
-          type="button"
-          class="btn"
           id="save"
+          class="btn"
+          type="button"
         >
-          ثبت قرار ❤️
+          همین شد قرارمون ❤️
         </button>
 
-        <div class="small-note">
-          تاریخ، ساعت و جایی که دوست داری رو انتخاب کن 🌷
+        <div class="form-note">
+
+          قول میدم این اطلاعات فقط
+          برای ثبت همین قرار استفاده بشه 🌷
+
         </div>
 
       </div>
@@ -786,22 +1366,26 @@
     </section>
 
 
-    <!-- PAGE 3 -->
+    <!-- ================= PAGE 3 ================= -->
+
     <section
       id="page3"
       class="page"
-      aria-labelledby="title3"
     >
 
-      <div class="heart">
-        ❤️❤️❤️
+      <div class="success-circle">
+        ✓
       </div>
 
-      <h1 id="title3">
-        برای تو...
+      <div class="mini-badge">
+        قرارمون ثبت شد ❤️
+      </div>
+
+      <h1>
+        حالا فقط اینو بخون...
       </h1>
 
-      <div class="message-box">
+      <div class="message-card">
 
         <p
           id="text"
@@ -812,632 +1396,805 @@
 
     </section>
 
-  </main>
+  </div>
 
+</div>
 
-  <script>
-    (() => {
 
-      "use strict";
+<script>
 
-      /* =========================
-         CONFIG
-      ========================= */
+(() => {
 
-      const sheetURL =
-        "https://script.google.com/macros/s/AKfycbwh3ZhvKJ8EnegU4dSsxdtRf3s0do17wf_Trd_pqYbM5g9zBcD_Hu1d9Z5irx_ABFU1/exec";
+"use strict";
 
 
-      /* =========================
-         ELEMENTS
-      ========================= */
+/* =================================
+   CONFIG
+================================= */
 
-      const page1 =
-        document.getElementById("page1");
+const sheetURL =
+"https://script.google.com/macros/s/AKfycbwh3ZhvKJ8EnegU4dSsxdtRf3s0do17wf_Trd_pqYbM5g9zBcD_Hu1d9Z5irx_ABFU1/exec";
 
-      const page2 =
-        document.getElementById("page2");
 
-      const page3 =
-        document.getElementById("page3");
+/* =================================
+   ELEMENTS
+================================= */
 
-      const yes =
-        document.getElementById("yes");
+const pages = [
+  document.getElementById("page1"),
+  document.getElementById("page2"),
+  document.getElementById("page3")
+];
 
-      const no =
-        document.getElementById("no");
+const progress = [
+  document.getElementById("progress1"),
+  document.getElementById("progress2"),
+  document.getElementById("progress3")
+];
 
-      const save =
-        document.getElementById("save");
+const yes =
+document.getElementById("yes");
 
-      const dateInput =
-        document.getElementById("date");
+const no =
+document.getElementById("no");
 
-      const timeInput =
-        document.getElementById("time");
+const save =
+document.getElementById("save");
 
-      const placeInput =
-        document.getElementById("place");
+const dateInput =
+document.getElementById("date");
 
-      const textBox =
-        document.getElementById("text");
+const timeInput =
+document.getElementById("time");
 
-      const buttonsArea =
-        document.getElementById("buttonsArea");
+const placeInput =
+document.getElementById("place");
 
+const textBox =
+document.getElementById("text");
 
-      let isSending = false;
-      let typingTimer = null;
+const decisionZone =
+document.getElementById("decisionZone");
 
-      let noEscapeCount = 0;
 
+let sending = false;
 
-      /* =========================
-         PAGE CHANGE
-      ========================= */
+let typingTimer = null;
 
-      function showPage(page) {
+let noCount = 0;
 
-        [page1, page2, page3]
-          .forEach(item => {
-            item.classList.remove("active");
-          });
 
-        page.classList.add("active");
+/* =================================
+   SHOW PAGE
+================================= */
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      }
+function showPage(index){
 
+  pages.forEach(
+    page =>
+    page.classList.remove("active")
+  );
 
-      /* =========================
-         DATEPICKER
-      ========================= */
+  progress.forEach(
+    dot =>
+    dot.classList.remove("active")
+  );
 
-      function initDatepicker() {
+  pages[index]
+    .classList
+    .add("active");
 
-        try {
+  progress[index]
+    .classList
+    .add("active");
 
-          if (
-            window.jQuery &&
-            $.fn &&
-            typeof $.fn.persianDatepicker === "function"
-          ) {
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
-            $("#date").persianDatepicker({
+}
 
-              format: "YYYY/MM/DD",
 
-              autoClose: true,
+/* =================================
+   DATE PICKER
+================================= */
 
-              initialValue: false,
+function initDatepicker(){
 
-              observer: true,
+  try{
 
-              calendar: {
-                persian: {
-                  locale: "fa"
-                }
-              }
+    if(
+      window.jQuery &&
+      $.fn &&
+      $.fn.persianDatepicker
+    ){
 
-            });
+      $("#date")
+      .persianDatepicker({
 
-          }
-          else {
+        format:
+        "YYYY/MM/DD",
 
-            // اگر CDN یا پلاگین لود نشد
-            dateInput.removeAttribute("readonly");
+        autoClose:
+        true,
 
-            dateInput.setAttribute(
-              "inputmode",
-              "numeric"
-            );
+        initialValue:
+        false,
 
-            dateInput.placeholder =
-              "مثلاً 1405/07/20";
-          }
+        observer:
+        true
 
-        }
-        catch (error) {
+      });
 
-          dateInput.removeAttribute("readonly");
+    }
+    else{
 
-          dateInput.setAttribute(
-            "inputmode",
-            "numeric"
-          );
+      fallbackDate();
 
-          dateInput.placeholder =
-            "مثلاً 1405/07/20";
-        }
+    }
 
-      }
+  }
+  catch(e){
 
+    fallbackDate();
 
-      /* =========================
-         YES
-      ========================= */
+  }
 
-      yes.addEventListener(
-        "click",
-        () => {
+}
 
-          showPage(page2);
 
-          setTimeout(() => {
-            dateInput.focus({
-              preventScroll: true
-            });
-          }, 350);
+function fallbackDate(){
 
-        }
-      );
+  dateInput
+  .removeAttribute(
+    "readonly"
+  );
 
+  dateInput
+  .setAttribute(
+    "inputmode",
+    "numeric"
+  );
 
-      /* =========================
-         NO ESCAPE
-      ========================= */
+  dateInput
+  .placeholder =
+  "مثلاً 1405/07/20";
 
-      function moveNo(event) {
+}
 
-        if (event) {
-          event.preventDefault();
-        }
 
-        noEscapeCount++;
+/* =================================
+   YES
+================================= */
 
-        const area =
-          buttonsArea.getBoundingClientRect();
+yes.addEventListener(
+"click",
+()=>{
 
-        const button =
-          no.getBoundingClientRect();
+  if(
+    navigator.vibrate
+  ){
 
-        const padding = 8;
+    navigator.vibrate(35);
 
-        const maxX =
-          Math.max(
-            padding,
-            area.width -
-            button.width -
-            padding
-          );
+  }
 
-        const maxY =
-          Math.max(
-            padding,
-            area.height -
-            button.height -
-            padding
-          );
+  showPage(1);
 
-        const x =
-          Math.random() *
-          (maxX - padding) +
-          padding;
+});
 
-        const y =
-          Math.random() *
-          (maxY - padding) +
-          padding;
 
-        no.style.left =
-          `${x}px`;
+/* =================================
+   NO BUTTON
+================================= */
 
-        no.style.top =
-          `${y}px`;
+function escapeNo(e){
 
-        no.style.bottom =
-          "auto";
+  if(e){
+    e.preventDefault();
+  }
 
-        no.style.transform =
-          "translate(0,0)";
+  noCount++;
 
+  const area =
+  decisionZone
+  .getBoundingClientRect();
 
-        // دکمه آره خیلی بزرگ نشه
-        const scale =
-          Math.min(
-            1 + noEscapeCount * 0.045,
-            1.32
-          );
+  const btn =
+  no
+  .getBoundingClientRect();
 
-        yes.style.transform =
-          `translateX(50%) scale(${scale})`;
+  const padding = 6;
 
+  const maxX =
+  Math.max(
+    padding,
+    area.width -
+    btn.width -
+    padding
+  );
 
-        if (noEscapeCount === 3) {
-          no.textContent = "مطمئنی؟ 😅";
-        }
+  const maxY =
+  Math.max(
+    padding,
+    area.height -
+    btn.height -
+    padding
+  );
 
-        if (noEscapeCount === 6) {
-          no.textContent = "بازم نه؟ 🥹";
-        }
+  no.style.left =
+  `${
+    padding +
+    Math.random() *
+    (maxX-padding)
+  }px`;
 
-        if (noEscapeCount === 9) {
-          no.textContent = "نمی‌ذارم 😌";
-        }
+  no.style.top =
+  `${
+    padding +
+    Math.random() *
+    (maxY-padding)
+  }px`;
 
-      }
+  no.style.bottom =
+  "auto";
 
+  no.style.transform =
+  "translate(0,0)";
 
-      // دسکتاپ
-      no.addEventListener(
-        "mouseenter",
-        moveNo
-      );
 
-      // موبایل
-      no.addEventListener(
-        "pointerdown",
-        moveNo
-      );
+  const scale =
+  Math.min(
+    1 + noCount*.045,
+    1.30
+  );
 
+  yes.style.transform =
+  `translateX(50%) scale(${scale})`;
 
-      /* =========================
-         VALIDATION
-      ========================= */
 
-      function normalize(value) {
+  if(noCount===2){
+    no.textContent =
+    "مطمئنی؟ 😅";
+  }
 
-        return String(value || "")
-          .trim();
+  if(noCount===4){
+    no.textContent =
+    "یه بار دیگه فکر کن 🥹";
+  }
 
-      }
+  if(noCount===7){
+    no.textContent =
+    "آخه چرا؟ 😭";
+  }
 
+  if(noCount===10){
+    no.textContent =
+    "نه دیگه 😌";
+  }
 
-      function validateForm() {
+}
 
-        const date =
-          normalize(dateInput.value);
 
-        const time =
-          normalize(timeInput.value);
+no.addEventListener(
+"mouseenter",
+escapeNo
+);
 
-        const place =
-          normalize(placeInput.value);
+no.addEventListener(
+"pointerdown",
+escapeNo
+);
 
 
-        if (!date) {
+/* =================================
+   VALIDATE
+================================= */
 
-          alert(
-            "اول تاریخ قرار رو انتخاب کن ❤️"
-          );
+function clean(value){
 
-          return null;
-        }
+  return String(
+    value || ""
+  ).trim();
 
+}
 
-        if (!time) {
 
-          alert(
-            "ساعت قرار رو هم انتخاب کن ⏰"
-          );
+function getForm(){
 
-          return null;
-        }
+  const date =
+  clean(
+    dateInput.value
+  );
 
+  const time =
+  clean(
+    timeInput.value
+  );
 
-        if (!place) {
+  const place =
+  clean(
+    placeInput.value
+  );
 
-          alert(
-            "مکان قرار رو هم بنویس 📍"
-          );
 
-          placeInput.focus();
+  if(!date){
 
-          return null;
-        }
+    alert(
+      "تاریخ قرار رو انتخاب کن ❤️"
+    );
 
+    return null;
 
-        return {
-          date,
-          time,
-          place
-        };
+  }
 
-      }
 
+  if(!time){
 
-      /* =========================
-         SEND DATA
-      ========================= */
+    alert(
+      "ساعت قرار رو انتخاب کن ⏰"
+    );
 
-      async function sendData(data) {
+    return null;
 
-        await fetch(
-          sheetURL,
-          {
+  }
 
-            method: "POST",
 
-            mode: "no-cors",
+  if(!place){
 
-            headers: {
-              "Content-Type":
-                "text/plain;charset=utf-8"
-            },
+    alert(
+      "جای قرار رو هم بهم بگو 📍"
+    );
 
-            body:
-              JSON.stringify(data)
+    placeInput.focus();
 
-          }
+    return null;
+
+  }
+
+
+  return {
+    date,
+    time,
+    place
+  };
+
+}
+
+
+/* =================================
+   SEND
+================================= */
+
+async function send(data){
+
+  await fetch(
+    sheetURL,
+    {
+
+      method:
+      "POST",
+
+      mode:
+      "no-cors",
+
+      headers:{
+        "Content-Type":
+        "text/plain;charset=utf-8"
+      },
+
+      body:
+      JSON.stringify(data)
+
+    }
+  );
+
+}
+
+
+/* =================================
+   SAVE
+================================= */
+
+save.addEventListener(
+"click",
+async()=>{
+
+  if(sending){
+    return;
+  }
+
+  const data =
+  getForm();
+
+  if(!data){
+    return;
+  }
+
+
+  sending = true;
+
+  save.disabled =
+  true;
+
+  const oldText =
+  save.textContent;
+
+  save.textContent =
+  "دارم قرارمونو ثبت می‌کنم... 💗";
+
+
+  try{
+
+    await send(data);
+
+    if(
+      navigator.vibrate
+    ){
+
+      navigator.vibrate([
+        40,
+        40,
+        80
+      ]);
+
+    }
+
+    showPage(2);
+
+    explodeHearts();
+
+    setTimeout(
+      ()=>{
+
+        startTyping(
+          data.date,
+          data.time,
+          data.place
         );
 
-      }
+      },
+      450
+    );
+
+  }
+  catch(e){
+
+    console.error(e);
+
+    alert(
+      "یه مشکلی پیش اومد، دوباره امتحان کن ❤️"
+    );
+
+    sending =
+    false;
+
+    save.disabled =
+    false;
+
+    save.textContent =
+    oldText;
+
+  }
+
+});
 
 
-      /* =========================
-         SAVE
-      ========================= */
+/* =================================
+   TYPEWRITER
+================================= */
 
-      save.addEventListener(
-        "click",
-        async () => {
+function startTyping(
+date,
+time,
+place
+){
 
-          if (isSending) {
-            return;
-          }
-
-          const data =
-            validateForm();
-
-          if (!data) {
-            return;
-          }
-
-
-          isSending = true;
-
-          save.disabled = true;
-
-          const oldText =
-            save.textContent;
-
-          save.textContent =
-            "در حال ثبت... ❤️";
-
-
-          try {
-
-            await sendData(data);
-
-            showPage(page3);
-
-            startTyping(
-              data.date,
-              data.time,
-              data.place
-            );
-
-          }
-          catch (error) {
-
-            console.error(error);
-
-            alert(
-              "ارسال اطلاعات با مشکل مواجه شد. دوباره امتحان کن ❤️"
-            );
-
-            isSending = false;
-
-            save.disabled = false;
-
-            save.textContent =
-              oldText;
-          }
-
-        }
-      );
-
-
-      /* =========================
-         TYPEWRITER
-      ========================= */
-
-      function startTyping(
-        date,
-        time,
-        place
-      ) {
-
-        const message =
+const message =
 `درست یک هفته از هم دور بودیم...
 
-ولی بیا با دیدار هم، این دوری رو تموم کنیم ❤️
+شاید این چند روز
+بعضی چیزها سخت شد،
+بعضی حرف‌ها گفته نشد
+و بعضی حس‌ها موند برای بعد...
 
-بیا دوباره کنار هم بشینیم،
-حرف بزنیم و بخندیم...
+ولی من هنوز فکر می‌کنم
+یه گفت‌وگوی آروم،
+یه لبخند
+و یه دیدار خوب
+می‌تونه خیلی چیزها رو قشنگ‌تر کنه ❤️
 
-قرارمون:
+پس این شد قرارمون:
 
 📅 ${date}
 ⏰ ${time}
 📍 ${place}
 
-من مثل قرار هر شب،
-ساعت ۱۲ بهت زنگ می‌زنم...
+بیا دوباره کنار هم بشینیم،
+حرف بزنیم،
+بخندیم
+و بذاریم این فاصله همین‌جا تموم بشه...
 
-پیشی میشی 😻❤️
+من مثل قرار هر شب
+ساعت ۱۲ بهت زنگ می‌زنم ❤️
+
+پیشی میشی؟ 😻
 
 اشی مشی کوچولوی من ❤️
 
-این وب‌سایت رو فقط برای تو ساختم،
-چون ارزششو داری.
+این صفحه رو فقط برای تو ساختم،
+چون برای من ارزششو داری...
 
-منتظرم... ❤️`;
-
-
-        if (typingTimer) {
-          clearInterval(typingTimer);
-        }
+منتظرم ❤️`;
 
 
-        textBox.textContent = "";
+  if(typingTimer){
 
-        textBox.classList.add(
-          "cursor"
-        );
+    clearInterval(
+      typingTimer
+    );
 
-
-        let index = 0;
-
-
-        typingTimer =
-          setInterval(
-            () => {
-
-              textBox.textContent +=
-                message.charAt(index);
-
-              index++;
+  }
 
 
-              if (
-                index >= message.length
-              ) {
+  textBox.textContent =
+  "";
 
-                clearInterval(
-                  typingTimer
-                );
-
-                typingTimer = null;
-
-                textBox.classList.remove(
-                  "cursor"
-                );
-              }
-
-            },
-            45
-          );
-
-      }
+  textBox
+  .classList
+  .add("cursor");
 
 
-      /* =========================
-         HEART BACKGROUND
-      ========================= */
-
-      function createFloatingHeart() {
-
-        // اگر تب باز نیست چیزی نساز
-        if (document.hidden) {
-          return;
-        }
+  let index=0;
 
 
-        const heart =
-          document.createElement("div");
+  typingTimer =
+  setInterval(
+  ()=>{
 
-        heart.className =
-          "heart-bg";
+    textBox.textContent +=
+    message.charAt(index);
 
-
-        const hearts = [
-          "❤️",
-          "💕",
-          "💗",
-          "💖"
-        ];
+    index++;
 
 
-        heart.textContent =
-          hearts[
-            Math.floor(
-              Math.random() *
-              hearts.length
-            )
-          ];
+    if(
+      index >=
+      message.length
+    ){
 
-
-        heart.style.left =
-          `${Math.random() * 100}%`;
-
-
-        heart.style.fontSize =
-          `${14 + Math.random() * 15}px`;
-
-
-        heart.style.setProperty(
-          "--duration",
-          `${5 + Math.random() * 3}s`
-        );
-
-
-        heart.style.setProperty(
-          "--drift",
-          `${-40 + Math.random() * 80}px`
-        );
-
-
-        document.body.appendChild(
-          heart
-        );
-
-
-        setTimeout(
-          () => {
-            heart.remove();
-          },
-          8500
-        );
-
-      }
-
-
-      const prefersReducedMotion =
-        window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-
-      if (!prefersReducedMotion) {
-
-        setInterval(
-          createFloatingHeart,
-          900
-        );
-
-      }
-
-
-      /* =========================
-         MOBILE KEYBOARD FIX
-      ========================= */
-
-      if (window.visualViewport) {
-
-        window.visualViewport
-          .addEventListener(
-            "resize",
-            () => {
-
-              document.documentElement
-                .style
-                .setProperty(
-                  "--viewport-height",
-                  `${window.visualViewport.height}px`
-                );
-
-            }
-          );
-
-      }
-
-
-      /* =========================
-         INIT
-      ========================= */
-
-      document.addEventListener(
-        "DOMContentLoaded",
-        initDatepicker
+      clearInterval(
+        typingTimer
       );
 
+      typingTimer =
+      null;
 
-    })();
-  </script>
+      textBox
+      .classList
+      .remove("cursor");
+
+    }
+
+  },
+  37
+  );
+
+}
+
+
+/* =================================
+   FLOAT HEARTS
+================================= */
+
+function floatingHeart(){
+
+  if(
+    document.hidden
+  ){
+    return;
+  }
+
+  const heart =
+  document.createElement(
+    "div"
+  );
+
+  heart.className =
+  "float-heart";
+
+
+  const icons = [
+    "❤️",
+    "💕",
+    "💗",
+    "💖",
+    "💞"
+  ];
+
+
+  heart.textContent =
+  icons[
+    Math.floor(
+      Math.random() *
+      icons.length
+    )
+  ];
+
+
+  heart.style.left =
+  `${Math.random()*100}%`;
+
+
+  heart.style.fontSize =
+  `${
+    13 +
+    Math.random()*16
+  }px`;
+
+
+  heart.style.setProperty(
+    "--duration",
+    `${
+      5 +
+      Math.random()*3
+    }s`
+  );
+
+
+  heart.style.setProperty(
+    "--drift",
+    `${
+      -45 +
+      Math.random()*90
+    }px`
+  );
+
+
+  document.body
+  .appendChild(
+    heart
+  );
+
+
+  setTimeout(
+    ()=>heart.remove(),
+    8500
+  );
+
+}
+
+
+/* =================================
+   HEART EXPLOSION
+================================= */
+
+function explodeHearts(){
+
+  const icons = [
+    "❤️",
+    "💗",
+    "💕",
+    "💖"
+  ];
+
+  for(
+    let i=0;
+    i<22;
+    i++
+  ){
+
+    const h =
+    document.createElement(
+      "div"
+    );
+
+    h.className =
+    "confetti-heart";
+
+    h.textContent =
+    icons[
+      Math.floor(
+        Math.random() *
+        icons.length
+      )
+    ];
+
+
+    const angle =
+    Math.random() *
+    Math.PI *
+    2;
+
+    const distance =
+    100 +
+    Math.random() *
+    230;
+
+
+    h.style.setProperty(
+      "--x",
+      `${
+        Math.cos(angle) *
+        distance
+      }px`
+    );
+
+
+    h.style.setProperty(
+      "--y",
+      `${
+        Math.sin(angle) *
+        distance
+      }px`
+    );
+
+
+    h.style.setProperty(
+      "--r",
+      `${
+        -120 +
+        Math.random()*240
+      }deg`
+    );
+
+
+    h.style.setProperty(
+      "--size",
+      `${
+        14 +
+        Math.random()*18
+      }px`
+    );
+
+
+    document.body
+    .appendChild(h);
+
+
+    setTimeout(
+      ()=>h.remove(),
+      1700
+    );
+
+  }
+
+}
+
+
+/* =================================
+   INIT
+================================= */
+
+const reduceMotion =
+window
+.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+)
+.matches;
+
+
+if(!reduceMotion){
+
+  setInterval(
+    floatingHeart,
+    850
+  );
+
+}
+
+
+document
+.addEventListener(
+  "DOMContentLoaded",
+  initDatepicker
+);
+
+
+})();
+
+</script>
 
 </body>
 </html>
