@@ -2,567 +2,1249 @@
 <html lang="fa" dir="rtl">
 
 <head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+  />
+
+  <meta name="theme-color" content="#ff6f91" />
+
+  <title>یه حرف کوچیک ❤️</title>
+
+  <!-- Persian Datepicker -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/persian-datepicker@latest/dist/css/persian-datepicker.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-date/dist/persian-date.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-datepicker/dist/js/persian-datepicker.min.js"></script>
+
+  <style>
+    :root {
+      --red: #e63955;
+      --red-dark: #d62849;
+      --pink: #ff7fa8;
+      --pink-light: #ffd2df;
+      --text: #41414b;
+      --muted: #777783;
+      --white: #ffffff;
+      --shadow: 0 24px 80px rgba(111, 17, 48, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      min-height: 100%;
+      background: #ff758c;
+    }
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+      min-height: 100svh;
+
+      padding:
+        max(18px, env(safe-area-inset-top))
+        max(16px, env(safe-area-inset-right))
+        max(18px, env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
+
+      display: grid;
+      place-items: center;
+
+      overflow-x: hidden;
+
+      font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(255,255,255,.24),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 90% 80%,
+          rgba(255,255,255,.18),
+          transparent 25%
+        ),
+        linear-gradient(
+          135deg,
+          #ff758c 0%,
+          #ff7eb3 48%,
+          #ff96b8 100%
+        );
+
+      overscroll-behavior-y: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      touch-action: manipulation;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .background-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(8px);
+      opacity: .25;
+      background: white;
+    }
+
+    .blob-1 {
+      width: 170px;
+      height: 170px;
+      top: -70px;
+      right: -50px;
+    }
+
+    .blob-2 {
+      width: 220px;
+      height: 220px;
+      bottom: -100px;
+      left: -80px;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .container {
+      position: relative;
+      z-index: 10;
+
+      width: min(100%, 470px);
+
+      padding: clamp(26px, 6vw, 42px)
+               clamp(18px, 5vw, 30px);
+
+      border-radius: clamp(24px, 7vw, 38px);
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.98),
+          rgba(255,250,252,.97)
+        );
+
+      box-shadow: var(--shadow);
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+      text-align: center;
 
-<title>یه حرف کوچیک ❤️</title>
+      overflow: visible;
 
+      border: 1px solid rgba(255,255,255,.9);
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@latest/dist/css/persian-datepicker.min.css">
+      animation: cardIn .7s cubic-bezier(.22,1,.36,1);
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/persian-date/dist/persian-date.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/persian-datepicker/dist/js/persian-datepicker.min.js"></script>
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+      }
 
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-<style>
+    /* =========================
+       PAGES
+    ========================= */
 
-*{
-box-sizing:border-box;
-font-family:tahoma;
-}
+    .page {
+      display: none;
+      animation: pageIn .45s ease;
+    }
 
+    .page.active {
+      display: block;
+    }
 
-body{
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
 
-min-height:100vh;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-margin:0;
+    /* =========================
+       HEART
+    ========================= */
 
-display:flex;
+    .heart {
+      width: 104px;
+      height: 104px;
 
-justify-content:center;
+      margin: 0 auto 10px;
 
-align-items:center;
+      display: grid;
+      place-items: center;
 
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
+      font-size: clamp(62px, 18vw, 82px);
 
-overflow-y:auto;
+      filter:
+        drop-shadow(
+          0 10px 18px rgba(230,57,85,.18)
+        );
 
-padding:20px;
+      animation: pulse 1.35s ease-in-out infinite;
+      transform-origin: center;
+    }
 
--webkit-overflow-scrolling:touch;
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
 
-}
+      50% {
+        transform: scale(1.12);
+      }
+    }
 
+    h1 {
+      margin: 8px 0 12px;
 
+      color: var(--red);
 
-.container{
+      font-size: clamp(22px, 6vw, 29px);
 
-width:90%;
+      line-height: 1.7;
+    }
 
-max-width:450px;
+    p {
+      margin: 0 auto;
 
-max-height:90vh;
+      color: var(--muted);
 
-overflow-y:auto;
+      font-size: clamp(15px, 4.2vw, 17px);
 
-background:white;
+      line-height: 2;
 
-padding:35px 25px;
+      max-width: 390px;
+    }
 
-border-radius:35px;
+    /* =========================
+       BUTTONS
+    ========================= */
 
-text-align:center;
+    .buttons {
+      position: relative;
 
-box-shadow:0 20px 60px rgba(0,0,0,.2);
+      width: 100%;
+      min-height: 118px;
 
-}
+      margin-top: 28px;
+    }
 
+    .btn {
+      border: 0;
+      outline: 0;
 
+      min-height: 54px;
 
-.heart{
+      padding: 13px 28px;
 
-font-size:80px;
+      border-radius: 999px;
 
-animation:pulse 1.2s infinite;
+      font-size: 18px;
+      font-weight: 700;
 
-}
+      cursor: pointer;
 
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease,
+        background .2s ease;
 
+      user-select: none;
+      -webkit-user-select: none;
+    }
 
-@keyframes pulse{
+    .btn:active {
+      transform: scale(.96);
+    }
 
-50%{
-transform:scale(1.2);
-}
+    #yes {
+      position: absolute;
 
-}
+      right: 50%;
+      top: 0;
 
+      transform: translateX(50%);
 
+      color: white;
 
-h1{
+      background:
+        linear-gradient(
+          135deg,
+          #ef476f,
+          #e63955
+        );
 
-color:#e63946;
+      box-shadow:
+        0 12px 26px rgba(230,57,85,.28);
 
-font-size:28px;
+      z-index: 2;
+    }
 
-}
+    #yes:active {
+      transform:
+        translateX(50%)
+        scale(.96);
+    }
 
+    #no {
+      position: absolute;
 
+      left: 50%;
+      bottom: 0;
 
-p{
+      transform: translateX(-50%);
 
-font-size:17px;
+      background: #eeeeF2;
+      color: #666;
 
-line-height:2;
+      z-index: 3;
 
-color:#555;
+      transition:
+        left .22s ease,
+        top .22s ease,
+        transform .22s ease;
+    }
 
-}
+    /* =========================
+       FORM
+    ========================= */
 
+    .form {
+      margin-top: 24px;
+    }
 
+    .field {
+      position: relative;
+      margin-bottom: 14px;
+    }
 
-button{
+    .field-icon {
+      position: absolute;
+      top: 50%;
+      right: 18px;
 
-border:none;
+      transform: translateY(-50%);
 
-border-radius:50px;
+      font-size: 20px;
 
-padding:15px 35px;
+      pointer-events: none;
+      z-index: 2;
+    }
 
-font-size:20px;
+    input {
+      appearance: none;
+      -webkit-appearance: none;
 
-cursor:pointer;
+      display: block;
 
-}
+      width: 100%;
+      height: 58px;
 
+      padding:
+        12px
+        52px
+        12px
+        18px;
 
+      border: 1.5px solid #eee1e6;
 
-#yes,#save{
+      border-radius: 18px;
 
-background:#e63946;
+      background: #fffafb;
 
-color:white;
+      color: #40404a;
 
-}
+      font-size: 16px;
 
+      text-align: right;
 
+      outline: none;
 
-#no{
+      transition:
+        border .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
 
-background:#ddd;
+    input::placeholder {
+      color: #aaa2a6;
+    }
 
-position:absolute;
+    input:focus {
+      border-color: #f08aa4;
 
-}
+      background: white;
 
+      box-shadow:
+        0 0 0 4px rgba(230,57,85,.08);
+    }
 
+    input[type="time"] {
+      direction: ltr;
+      text-align: center;
+    }
 
-.buttons{
+    #save {
+      width: 100%;
 
-height:90px;
+      margin-top: 7px;
 
-position:relative;
+      color: white;
 
-margin-top:30px;
+      background:
+        linear-gradient(
+          135deg,
+          #ef476f,
+          #d92d50
+        );
 
-}
+      box-shadow:
+        0 12px 28px rgba(230,57,85,.25);
+    }
 
+    #save:disabled {
+      opacity: .72;
+      cursor: not-allowed;
+    }
 
+    .small-note {
+      margin-top: 14px;
 
-#page2,#page3{
+      color: #aaa;
 
-display:none;
+      font-size: 12px;
 
-}
+      line-height: 1.9;
+    }
 
+    /* =========================
+       PAGE 3
+    ========================= */
 
+    #page3 .heart {
+      width: auto;
+      font-size: clamp(42px, 12vw, 60px);
+    }
 
-input{
+    .message-box {
+      margin-top: 18px;
 
-width:100%;
+      padding: 20px 18px;
 
-padding:15px;
+      border-radius: 22px;
 
-border-radius:20px;
+      background:
+        linear-gradient(
+          135deg,
+          #fff6f9,
+          #fff
+        );
 
-border:1px solid #ddd;
+      border: 1px solid #ffe4ec;
 
-font-size:16px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.6);
+    }
 
-text-align:center;
+    .typing {
+      min-height: 270px;
 
-margin:10px 0;
+      white-space: pre-line;
 
-}
+      text-align: right;
 
+      color: #575760;
 
+      line-height: 2.05;
 
-.typing{
+      font-size: clamp(14px, 4vw, 16px);
+    }
 
-white-space:pre-line;
+    .cursor::after {
+      content: "▋";
 
-min-height:250px;
+      display: inline-block;
 
-}
+      color: var(--red);
 
+      margin-right: 2px;
 
+      animation: blink .8s infinite;
+    }
 
-.heart-bg{
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
 
-position:fixed;
+    /* =========================
+       FLOATING HEARTS
+    ========================= */
 
-top:-50px;
+    .heart-bg {
+      position: fixed;
 
-font-size:25px;
+      bottom: -50px;
 
-animation:fall 5s linear infinite;
+      pointer-events: none;
 
-z-index:-1;
+      z-index: 2;
 
-}
+      opacity: 0;
 
+      animation:
+        floatHeart var(--duration, 6s)
+        linear forwards;
 
-@keyframes fall{
+      filter:
+        drop-shadow(
+          0 4px 8px rgba(150,0,50,.12)
+        );
+    }
 
-to{
+    @keyframes floatHeart {
+      0% {
+        opacity: 0;
+        transform:
+          translate3d(0, 0, 0)
+          rotate(0deg)
+          scale(.65);
+      }
 
-transform:translateY(110vh);
+      15% {
+        opacity: .7;
+      }
 
-}
+      85% {
+        opacity: .5;
+      }
 
-}
+      100% {
+        opacity: 0;
+        transform:
+          translate3d(
+            var(--drift, 20px),
+            -115vh,
+            0
+          )
+          rotate(40deg)
+          scale(1.15);
+      }
+    }
 
+    /* =========================
+       DATEPICKER MOBILE FIX
+    ========================= */
 
-</style>
+    .datepicker-container {
+      z-index: 999999 !important;
+    }
 
+    .datepicker-plot-area {
+      max-width: calc(100vw - 24px) !important;
+      border-radius: 18px !important;
+      overflow: hidden;
+    }
+
+    /* =========================
+       SMALL MOBILE
+    ========================= */
+
+    @media (max-width: 360px) {
+      body {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .btn {
+        font-size: 16px;
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+    }
+
+    /* گوشی‌های کوتاه مثل مرورگر landscape */
+    @media (max-height: 650px) {
+      body {
+        place-items: start center;
+      }
+
+      .container {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      .heart {
+        font-size: 60px;
+        height: 80px;
+      }
+    }
+
+    /* Reduce Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
-
-
 
 <body>
 
+  <div class="background-glow">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <main class="container">
+
+    <!-- PAGE 1 -->
+    <section
+      id="page1"
+      class="page active"
+      aria-labelledby="title1"
+    >
+
+      <div class="heart">
+        ❤️
+      </div>
+
+      <h1 id="title1">
+        میای باهم صحبت کنیم؟
+      </h1>
+
+      <p>
+        شاید هنوز چندتا حرف مونده که باید
+        آروم و قشنگ با هم بزنیم...
+      </p>
+
+      <div
+        class="buttons"
+        id="buttonsArea"
+      >
+
+        <button
+          type="button"
+          class="btn"
+          id="yes"
+        >
+          آره ❤️
+        </button>
+
+        <button
+          type="button"
+          class="btn"
+          id="no"
+        >
+          نه
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 2 -->
+    <section
+      id="page2"
+      class="page"
+      aria-labelledby="title2"
+    >
+
+      <div class="heart">
+        💌
+      </div>
+
+      <h1 id="title2">
+        پس بیا یه قرار کوچیک داشته باشیم ❤️
+      </h1>
 
-<div class="container">
+      <p>
+        این دوری رو با یه دیدار قشنگ تموم کنیم...
+      </p>
 
+      <div class="form">
 
+        <div class="field">
 
-<div id="page1">
+          <span class="field-icon">
+            📅
+          </span>
 
+          <input
+            id="date"
+            type="text"
+            inputmode="none"
+            autocomplete="off"
+            placeholder="انتخاب تاریخ قرار"
+            readonly
+          />
 
-<div class="heart">❤️</div>
+        </div>
 
+        <div class="field">
 
-<h1>
-میای باهم صحبت کنیم؟
-</h1>
+          <span class="field-icon">
+            ⏰
+          </span>
 
+          <input
+            id="time"
+            type="time"
+            step="300"
+          />
 
-<p>
-شاید هنوز چندتا حرف مونده که باید آروم و قشنگ بزنیم...
-</p>
+        </div>
 
+        <div class="field">
 
-<div class="buttons">
+          <span class="field-icon">
+            📍
+          </span>
 
+          <input
+            id="place"
+            type="text"
+            autocomplete="off"
+            enterkeyhint="done"
+            placeholder="مکان قرار"
+            maxlength="100"
+          />
 
-<button id="yes">
-آره ❤️
-</button>
+        </div>
 
+        <button
+          type="button"
+          class="btn"
+          id="save"
+        >
+          ثبت قرار ❤️
+        </button>
 
-<button id="no">
-نه
-</button>
+        <div class="small-note">
+          تاریخ، ساعت و جایی که دوست داری رو انتخاب کن 🌷
+        </div>
 
+      </div>
 
-</div>
+    </section>
 
 
-</div>
+    <!-- PAGE 3 -->
+    <section
+      id="page3"
+      class="page"
+      aria-labelledby="title3"
+    >
 
+      <div class="heart">
+        ❤️❤️❤️
+      </div>
 
+      <h1 id="title3">
+        برای تو...
+      </h1>
 
+      <div class="message-box">
 
+        <p
+          id="text"
+          class="typing cursor"
+        ></p>
 
+      </div>
 
+    </section>
 
-<div id="page2">
+  </main>
 
 
-<div class="heart">💌</div>
+  <script>
+    (() => {
 
+      "use strict";
 
-<h1>
-پس بیا یه قرار کوچیک داشته باشیم ❤️
-</h1>
+      /* =========================
+         CONFIG
+      ========================= */
 
+      const sheetURL =
+        "https://script.google.com/macros/s/AKfycbwh3ZhvKJ8EnegU4dSsxdtRf3s0do17wf_Trd_pqYbM5g9zBcD_Hu1d9Z5irx_ABFU1/exec";
 
-<p>
-این دوری رو با یه دیدار قشنگ تموم کنیم...
-</p>
 
+      /* =========================
+         ELEMENTS
+      ========================= */
 
+      const page1 =
+        document.getElementById("page1");
 
-<input 
-id="date"
-placeholder="📅 انتخاب تاریخ قرار"
-readonly>
+      const page2 =
+        document.getElementById("page2");
 
+      const page3 =
+        document.getElementById("page3");
 
+      const yes =
+        document.getElementById("yes");
 
-<input
-type="time"
-id="time"
-step="300">
+      const no =
+        document.getElementById("no");
 
+      const save =
+        document.getElementById("save");
 
+      const dateInput =
+        document.getElementById("date");
 
-<input
-id="place"
-placeholder="📍 مکان قرار">
+      const timeInput =
+        document.getElementById("time");
 
+      const placeInput =
+        document.getElementById("place");
 
+      const textBox =
+        document.getElementById("text");
 
-<button id="save">
-ثبت قرار ❤️
-</button>
+      const buttonsArea =
+        document.getElementById("buttonsArea");
 
 
+      let isSending = false;
+      let typingTimer = null;
 
-</div>
+      let noEscapeCount = 0;
 
 
+      /* =========================
+         PAGE CHANGE
+      ========================= */
 
+      function showPage(page) {
 
+        [page1, page2, page3]
+          .forEach(item => {
+            item.classList.remove("active");
+          });
 
+        page.classList.add("active");
 
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
 
-<div id="page3">
 
+      /* =========================
+         DATEPICKER
+      ========================= */
 
-<div class="heart">
-❤️❤️❤️
-</div>
+      function initDatepicker() {
 
+        try {
 
-<h1>
-برای تو...
-</h1>
+          if (
+            window.jQuery &&
+            $.fn &&
+            typeof $.fn.persianDatepicker === "function"
+          ) {
 
+            $("#date").persianDatepicker({
 
-<p id="text" class="typing"></p>
+              format: "YYYY/MM/DD",
 
+              autoClose: true,
 
-</div>
+              initialValue: false,
 
+              observer: true,
 
+              calendar: {
+                persian: {
+                  locale: "fa"
+                }
+              }
 
-</div>
+            });
 
+          }
+          else {
 
+            // اگر CDN یا پلاگین لود نشد
+            dateInput.removeAttribute("readonly");
 
+            dateInput.setAttribute(
+              "inputmode",
+              "numeric"
+            );
 
+            dateInput.placeholder =
+              "مثلاً 1405/07/20";
+          }
 
+        }
+        catch (error) {
 
-<script>
+          dateInput.removeAttribute("readonly");
 
-// لینک گوگل شیت
-const sheetURL =
-"https://script.google.com/macros/s/AKfycbwh3ZhvKJ8EnegU4dSsxdtRf3s0do17wf_Trd_pqYbM5g9zBcD_Hu1d9Z5irx_ABFU1/exec";
+          dateInput.setAttribute(
+            "inputmode",
+            "numeric"
+          );
 
+          dateInput.placeholder =
+            "مثلاً 1405/07/20";
+        }
 
-// جلوگیری از چند بار کلیک
-let isSending = false;
-let typingTimer = null;
+      }
 
 
+      /* =========================
+         YES
+      ========================= */
 
-// تقویم شمسی
+      yes.addEventListener(
+        "click",
+        () => {
 
-$("#date").persianDatepicker({
+          showPage(page2);
 
-format:"YYYY/MM/DD",
+          setTimeout(() => {
+            dateInput.focus({
+              preventScroll: true
+            });
+          }, 350);
 
-autoClose:true,
+        }
+      );
 
-initialValue:false
 
-});
+      /* =========================
+         NO ESCAPE
+      ========================= */
 
+      function moveNo(event) {
 
+        if (event) {
+          event.preventDefault();
+        }
 
+        noEscapeCount++;
 
-// دکمه نه
+        const area =
+          buttonsArea.getBoundingClientRect();
 
-const yes=document.getElementById("yes");
+        const button =
+          no.getBoundingClientRect();
 
-const no=document.getElementById("no");
+        const padding = 8;
 
+        const maxX =
+          Math.max(
+            padding,
+            area.width -
+            button.width -
+            padding
+          );
 
-let size=20;
+        const maxY =
+          Math.max(
+            padding,
+            area.height -
+            button.height -
+            padding
+          );
 
+        const x =
+          Math.random() *
+          (maxX - padding) +
+          padding;
 
-function moveNo(){
+        const y =
+          Math.random() *
+          (maxY - padding) +
+          padding;
 
+        no.style.left =
+          `${x}px`;
 
-let x=Math.random()*250-125;
+        no.style.top =
+          `${y}px`;
 
-let y=Math.random()*150-75;
+        no.style.bottom =
+          "auto";
 
+        no.style.transform =
+          "translate(0,0)";
 
-no.style.transform=
-`translate(${x}px,${y}px)`;
 
+        // دکمه آره خیلی بزرگ نشه
+        const scale =
+          Math.min(
+            1 + noEscapeCount * 0.045,
+            1.32
+          );
 
-size+=8;
+        yes.style.transform =
+          `translateX(50%) scale(${scale})`;
 
 
-yes.style.fontSize=size+"px";
+        if (noEscapeCount === 3) {
+          no.textContent = "مطمئنی؟ 😅";
+        }
 
+        if (noEscapeCount === 6) {
+          no.textContent = "بازم نه؟ 🥹";
+        }
 
-}
+        if (noEscapeCount === 9) {
+          no.textContent = "نمی‌ذارم 😌";
+        }
 
+      }
 
-no.addEventListener("mouseover",moveNo);
 
-no.addEventListener("touchstart",moveNo);
+      // دسکتاپ
+      no.addEventListener(
+        "mouseenter",
+        moveNo
+      );
 
+      // موبایل
+      no.addEventListener(
+        "pointerdown",
+        moveNo
+      );
 
 
+      /* =========================
+         VALIDATION
+      ========================= */
 
+      function normalize(value) {
 
-// رفتن صفحه دوم
+        return String(value || "")
+          .trim();
 
-yes.onclick=function(){
+      }
 
 
-page1.style.display="none";
+      function validateForm() {
 
-page2.style.display="block";
+        const date =
+          normalize(dateInput.value);
 
+        const time =
+          normalize(timeInput.value);
 
-};
+        const place =
+          normalize(placeInput.value);
 
 
+        if (!date) {
 
+          alert(
+            "اول تاریخ قرار رو انتخاب کن ❤️"
+          );
 
+          return null;
+        }
 
 
-// ثبت قرار
+        if (!time) {
 
-save.onclick=function(){
+          alert(
+            "ساعت قرار رو هم انتخاب کن ⏰"
+          );
 
+          return null;
+        }
 
-if(isSending) return;
 
+        if (!place) {
 
+          alert(
+            "مکان قرار رو هم بنویس 📍"
+          );
 
-let date =
-document.getElementById("date").value;
+          placeInput.focus();
 
+          return null;
+        }
 
-let time =
-document.getElementById("time").value;
 
+        return {
+          date,
+          time,
+          place
+        };
 
-let place =
-document.getElementById("place").value;
+      }
 
 
+      /* =========================
+         SEND DATA
+      ========================= */
 
+      async function sendData(data) {
 
-if(date && time && place){
+        await fetch(
+          sheetURL,
+          {
 
+            method: "POST",
 
-isSending=true;
+            mode: "no-cors",
 
+            headers: {
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
 
-save.disabled=true;
+            body:
+              JSON.stringify(data)
 
-save.innerHTML="در حال ثبت... ❤️";
+          }
+        );
 
+      }
 
 
-fetch(sheetURL,{
+      /* =========================
+         SAVE
+      ========================= */
 
-method:"POST",
+      save.addEventListener(
+        "click",
+        async () => {
 
-mode:"no-cors",
+          if (isSending) {
+            return;
+          }
 
-headers:{
+          const data =
+            validateForm();
 
-"Content-Type":"application/json"
+          if (!data) {
+            return;
+          }
 
-},
 
-body:JSON.stringify({
+          isSending = true;
 
-date:date,
+          save.disabled = true;
 
-time:time,
+          const oldText =
+            save.textContent;
 
-place:place
+          save.textContent =
+            "در حال ثبت... ❤️";
 
-})
 
-})
+          try {
 
+            await sendData(data);
 
-.then(()=>{
+            showPage(page3);
 
+            startTyping(
+              data.date,
+              data.time,
+              data.place
+            );
 
-page2.style.display="none";
+          }
+          catch (error) {
 
-page3.style.display="block";
+            console.error(error);
 
+            alert(
+              "ارسال اطلاعات با مشکل مواجه شد. دوباره امتحان کن ❤️"
+            );
 
-startTyping(date,time,place);
+            isSending = false;
 
+            save.disabled = false;
 
+            save.textContent =
+              oldText;
+          }
 
-})
+        }
+      );
 
 
-.catch(()=>{
+      /* =========================
+         TYPEWRITER
+      ========================= */
 
+      function startTyping(
+        date,
+        time,
+        place
+      ) {
 
-alert("خطا در ارسال اطلاعات");
-
-
-isSending=false;
-
-
-save.disabled=false;
-
-save.innerHTML="ثبت قرار ❤️";
-
-
-});
-
-
-
-}
-
-else{
-
-
-alert("همه قسمت‌ها رو کامل کن ❤️");
-
-
-}
-
-
-};
-
-
-
-
-
-
-
-function startTyping(date,time,place){
-
-
-
-let text =
-
+        const message =
 `درست یک هفته از هم دور بودیم...
 
-ولی بیا با دیدار هم،
-این دوری رو تموم کنیم ❤️
+ولی بیا با دیدار هم، این دوری رو تموم کنیم ❤️
 
 بیا دوباره کنار هم بشینیم،
 حرف بزنیم و بخندیم...
@@ -570,111 +1252,192 @@ let text =
 قرارمون:
 
 📅 ${date}
-
 ⏰ ${time}
-
 📍 ${place}
 
-
 من مثل قرار هر شب،
-ساعت ۱۲ بهت زنگ میزنم...
+ساعت ۱۲ بهت زنگ می‌زنم...
 
 پیشی میشی 😻❤️
 
 اشی مشی کوچولوی من ❤️
 
-این وب سایت فقط برای تو ساختم چون ارزششو داری
+این وب‌سایت رو فقط برای تو ساختم،
+چون ارزششو داری.
 
-منتظرم...`;
-
-
-
-let i=0;
+منتظرم... ❤️`;
 
 
-let box=document.getElementById("text");
+        if (typingTimer) {
+          clearInterval(typingTimer);
+        }
 
 
-// جلوگیری از چند تایپ همزمان
+        textBox.textContent = "";
 
-box.innerHTML="";
-
-
-if(typingTimer){
-
-clearInterval(typingTimer);
-
-}
+        textBox.classList.add(
+          "cursor"
+        );
 
 
-
-typingTimer=setInterval(()=>{
-
-
-box.innerHTML += text[i];
+        let index = 0;
 
 
-i++;
+        typingTimer =
+          setInterval(
+            () => {
+
+              textBox.textContent +=
+                message.charAt(index);
+
+              index++;
 
 
-if(i>=text.length){
+              if (
+                index >= message.length
+              ) {
+
+                clearInterval(
+                  typingTimer
+                );
+
+                typingTimer = null;
+
+                textBox.classList.remove(
+                  "cursor"
+                );
+              }
+
+            },
+            45
+          );
+
+      }
 
 
-clearInterval(typingTimer);
+      /* =========================
+         HEART BACKGROUND
+      ========================= */
+
+      function createFloatingHeart() {
+
+        // اگر تب باز نیست چیزی نساز
+        if (document.hidden) {
+          return;
+        }
 
 
-}
+        const heart =
+          document.createElement("div");
+
+        heart.className =
+          "heart-bg";
 
 
-},60);
+        const hearts = [
+          "❤️",
+          "💕",
+          "💗",
+          "💖"
+        ];
 
 
-
-}
-
-
-
-
-
-
-
-// قلب های متحرک
+        heart.textContent =
+          hearts[
+            Math.floor(
+              Math.random() *
+              hearts.length
+            )
+          ];
 
 
-setInterval(()=>{
+        heart.style.left =
+          `${Math.random() * 100}%`;
 
 
-let h=document.createElement("div");
+        heart.style.fontSize =
+          `${14 + Math.random() * 15}px`;
 
 
-h.className="heart-bg";
+        heart.style.setProperty(
+          "--duration",
+          `${5 + Math.random() * 3}s`
+        );
 
 
-h.innerHTML="❤️";
+        heart.style.setProperty(
+          "--drift",
+          `${-40 + Math.random() * 80}px`
+        );
 
 
-h.style.left=Math.random()*100+"%";
+        document.body.appendChild(
+          heart
+        );
 
 
-document.body.appendChild(h);
+        setTimeout(
+          () => {
+            heart.remove();
+          },
+          8500
+        );
+
+      }
 
 
-
-setTimeout(()=>{
-
-h.remove();
-
-},5000);
+      const prefersReducedMotion =
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
 
 
+      if (!prefersReducedMotion) {
 
-},800);
+        setInterval(
+          createFloatingHeart,
+          900
+        );
+
+      }
 
 
+      /* =========================
+         MOBILE KEYBOARD FIX
+      ========================= */
 
-</script>
+      if (window.visualViewport) {
 
+        window.visualViewport
+          .addEventListener(
+            "resize",
+            () => {
+
+              document.documentElement
+                .style
+                .setProperty(
+                  "--viewport-height",
+                  `${window.visualViewport.height}px`
+                );
+
+            }
+          );
+
+      }
+
+
+      /* =========================
+         INIT
+      ========================= */
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        initDatepicker
+      );
+
+
+    })();
+  </script>
 
 </body>
-
 </html>
